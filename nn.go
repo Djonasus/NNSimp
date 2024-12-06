@@ -1,6 +1,7 @@
 package nnsimp
 
 import (
+	"fmt"
 	"math"
 	"math/rand"
 )
@@ -122,4 +123,18 @@ func (nn *NeuralNetwork) Backward(input, target []float64) float64 {
 		}
 	}
 	return loss
+}
+
+// Train trains the neural network using the provided data and targets
+func (nn *NeuralNetwork) Train(data, targets [][]float64, epochs int) {
+	for epoch := 1; epoch <= epochs; epoch++ {
+		loss := 0.0
+		for i := range data {
+			loss += nn.Backward(data[i], targets[i])
+		}
+		loss /= float64(len(data))
+		if epoch%1000 == 0 || epoch == epochs {
+			fmt.Printf("Epoch %d: Loss = %.6f\n", epoch, loss)
+		}
+	}
 }
