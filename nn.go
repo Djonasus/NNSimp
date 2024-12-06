@@ -125,7 +125,7 @@ func (nn *NeuralNetwork) Backward(input, target []float64) float64 {
 	return loss
 }
 
-// Train trains the neural network using the provided data and targets
+// Train - функция обучения модели
 func (nn *NeuralNetwork) Train(data, targets [][]float64, epochs int) {
 	for epoch := 1; epoch <= epochs; epoch++ {
 		loss := 0.0
